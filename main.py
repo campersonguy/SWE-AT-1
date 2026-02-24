@@ -6,7 +6,7 @@ p1hand = []
 p2hand = []
 
 random.shuffle(cards["deck"])
-for i in range(26):
+for i in range(13):
     card = cards["deck"].pop(i)
     p1hand.append(card)
 for i in range(13):
@@ -30,6 +30,7 @@ printcard(lines - 14, col + 52, p1hand[11])
 printcard(lines - 14, col + 78, p1hand[12])
 
 
+print(p1hand)
 
 while True:
     i = 0

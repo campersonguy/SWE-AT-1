@@ -17,7 +17,7 @@ def newline(column):
 def printcard(line, col, card):  # print a card
     values = card.split("-")
     print(f"{move(line + 1, col)}┌{"─" * 23}┐{(newline(col) + "│" + (" " * 23) + "│") * 11}{newline(col)}└{"─" * 23}┘")
-    print(f"{move(line + 2, col + 2)}{ranks[int(values[1])]}{move(line + 12, col + 22)}{ranks[int(values[1])]}")
+    print(f"{move(line + 2, col + 2)}{ranks[ord(values[1]) - 65]}{move(line + 12, col + 22)}{ranks[ord(values[1]) - 65]}")
 
     symbollist = symbols[values[1]]
     for symbol in symbollist:
