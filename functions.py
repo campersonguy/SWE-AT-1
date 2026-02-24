@@ -10,14 +10,14 @@ def clearscreen():  # Clears the terminal
 def move(row, col):  # move cursor
     return f"\033[{row};{col}H"
 
-def newline():
-    return f"\n\033[{col}G"
+def newline(column):
+    return f"\n\033[{column}G"
 
 
-def printcard(line, col, values):  # print a card
-    clearscreen()
-    print(f"{move(line + 1, col)}┌{"─" * 23}┐{(newline() + "│" + (" " * 23) + "│") * 11}{newline()}└{"─" * 23}┘")
-    print(f"{move(line + 2, col + 2)}{values[1]}{move(line + 12, col + 22)}{values[1]}")
+def printcard(line, col, card):  # print a card
+    values = card.split("-")
+    print(f"{move(line + 1, col)}┌{"─" * 23}┐{(newline(col) + "│" + (" " * 23) + "│") * 11}{newline(col)}└{"─" * 23}┘")
+    print(f"{move(line + 2, col + 2)}{ranks[int(values[1])]}{move(line + 12, col + 22)}{ranks[int(values[1])]}")
 
     symbollist = symbols[values[1]]
     for symbol in symbollist:
