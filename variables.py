@@ -3,7 +3,8 @@ import random, shutil, math
 lines = shutil.get_terminal_size().lines
 col = math.floor(shutil.get_terminal_size().columns / 2 - 12)
 
-cursor = 0
+cursor = [0, 0]
+card = 0
 
 cards = {  # (suit-rank)
     "deck": [
