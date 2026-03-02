@@ -14,9 +14,12 @@ for i in range(13):
 
 v.cards["p1hand"].sort()
 
-printhand()
+for i in range(13):
+    printhand(i)
 
 keyboard.hook(on_event)
 
+printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
+
 while True:
-    v.card = ((-v.cursor[1] + 1) * 6 + v.cursor[0] + 4)
+    v.card = ((-v.cursor[1] + 1) * 6 + v.cursor[0] + 4) - 1

@@ -5,6 +5,7 @@ col = math.floor(shutil.get_terminal_size().columns / 2 - 12)
 
 cursor = [0, 0]
 card = 0
+selected = []
 
 cards = {  # (suit-rank)
     "deck": [
@@ -15,6 +16,7 @@ cards = {  # (suit-rank)
     ],
     "p1hand": [],
     "p2hand": [],
+    "pile": ["A-1"]
 }
 
 symbols = { # locations of symbols on the card
@@ -32,6 +34,8 @@ symbols = { # locations of symbols on the card
     "L": ["7-12"],
     "M": ["5-12", "9-12"],
 }
+
+plays = ["High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
 
 ranks = ["3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A", "2"]
 
@@ -64,9 +68,9 @@ class codes:  # List of ANSI escape codes for coloured text and other stuff
 
 suits = {  # Suit characters
     "1": f"{codes.orange}♦{codes.reset}",
-    "2": f"{codes.blue}♣{codes.reset}",
+    "2": f"{codes.gray}♣{codes.reset}",
     "3": f"{codes.red}♥{codes.reset}",
-    "4": f"{codes.gray}♠{codes.reset}",
+    "4": f"{codes.reset}♠{codes.reset}",
 }
 
 
