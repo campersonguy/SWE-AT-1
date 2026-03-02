@@ -35,6 +35,8 @@ symbols = { # locations of symbols on the card
     "M": ["5-12", "9-12"],
 }
 
+playtype = 0
+
 plays = ["High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
 
 ranks = ["3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A", "2"]
