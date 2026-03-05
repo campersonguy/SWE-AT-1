@@ -13,6 +13,7 @@ for i in range(13):
     v.cards["p2hand"].append(card)
 
 v.cards["p1hand"].sort()
+v.cards["p2hand"].sort()
 
 for i in range(13):
     printhand(i)

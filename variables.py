@@ -35,20 +35,19 @@ symbols = { # locations of symbols on the card
     "M": ["5-12", "9-12"],
 }
 
-playtype = 0
+playtype = 1
 
 plays = ["High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
 
 ranks = ["3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A", "2"]
-
-# The suit order (default: Spades, Hearts, Clubs, Diamonds)
-suitorder = ["S", "H", "C", "D"]
 
 # The maximum length of a straight, minimum is always 3, maximum is 13
 maxstraight = 13
 
 # Enable/Disable colour contrast cards - makes it easier to tell suits apart
 contrast = True
+
+turn = 1
 
 
 class codes:  # List of ANSI escape codes for coloured text and other stuff
