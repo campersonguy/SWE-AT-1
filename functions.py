@@ -117,25 +117,27 @@ def play(list):  # Executes when you play a card
 
     if len(list) == 1 and v.playtype == 0 or len(list) == 2 and v.playtype == 1 or len(list) == 3 and v.playtype == 2 or 3 <= len(list) <= v.maxstraight and v.playtype == 4:
         if v.cards["pile"][len(v.cards["pile"]) - 1].split("-") < cards[0]:
-            if v.playtype != 4:
+            if v.playtype == 4:
                 val = ord(cards[0].split("-")[0] - 65)
                 for card in cards:
                     if ord(card.split("-")[0] - 65) == val + 1:
                         val += 1
                     else:
-                        error("Yo brochacho ts is NOT a straight :sob:")
-
-            v.cards["pile"].append(cards[len(cards) - 1])
+                        error(f"You didn't play between 3 and {v.maxstraight} consecutive cards!")
+                        return
+            
+            for card in cards:
+                cardid = cards[0][0]
+                if card[0] != cardid:
+                    error("Not every card you played is the same!")
+                    return
+            
+            v.cards["pile"].append(v.cards[f"p{v.turn}hand"][list[-1]])
             for index in list:
                 v.cards[f"p{v.turn}hand"][index] = ""
                 printhand(index)
             v.selected.clear()
             passing(False)
-
-            if len(v.cards["pile"]) > 0:
-                printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
-            else:
-                printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
 
         else:
             error("Your card(s) are not higher than the last played card!")
@@ -144,17 +146,17 @@ def play(list):  # Executes when you play a card
 
 
 def passing(skip):  # Finishing turn / passing
-    if len(v.cards["pile"]) > 0:
-        printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
-    else:
-        printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
-
     if v.turn == 1:
         v.turn = 2
     else:
         v.turn = 1
     for i in range(13):
         printhand(i)
+
+    if len(v.cards["pile"]) > 0:
+        printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][-1])
+    else:
+        printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
 
     if skip:
         v.cards["pile"].clear()
