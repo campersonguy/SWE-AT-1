@@ -27,12 +27,12 @@ def on_event(event):  # keycheck
     keypress(event.name, event.event_type)
 
 def error(text):
-    print(f"{move(7, 0)}{v.codes.bold}{text}{v.codes.reset}")
+    print(f"{move(8, 0)}{v.codes.bold}{text}{v.codes.reset}")
     time.sleep(1.5)
-    clearline(7)
+    clearline(8)
 
 def printui():
-    print(f"{move(0, 0)}Control the cursor with WASD.\nSelect cards to play with SPACE.\nPlay your hand with ENTER, or pass turn with P.\n\nPlay Type: {v.plays[v.playtype]}")
+    print(f"{move(0, 0)}Control the cursor with WASD.\nSelect cards to play with SPACE.\nPlay your hand with ENTER, or pass turn with P.\n\nCurrent Turn: Player {v.turn}\nPlay Type: {v.plays[v.playtype]}")
 
 
 # The big stuff ----------------------------------------------------------------------------------------------------- #
@@ -51,7 +51,7 @@ def keypress(name, type):  # Key Detection
         case "space", "down":
             if v.card in v.selected:
                 v.selected.remove(v.card)
-            elif v.cards[f"p{v.type}hand"][v.card] != "":
+            elif v.cards[f"p{v.turn}hand"][v.card] != "":
                 v.selected.append(v.card)
             printhand(v.card)
         case "enter", "down":
@@ -61,7 +61,7 @@ def keypress(name, type):  # Key Detection
             else:
                 printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
         case "p", "down":
-            skip()
+            passing(True)
     match type:
         case "down":
             clearline(v.lines - 2)
@@ -75,7 +75,7 @@ def keypress(name, type):  # Key Detection
     printui()
 
 
-def printcard(line, col, card):  # print a card
+def printcard(line, col, card):  # Display a card using ASCII
     if card == "empty":
         print(f"{move(line + 1, col)}┌{"─" * 23}┐{(newline(col) + "│" + (" " * 23) + "│") * 11}{newline(col)}└{"─" * 23}┘")
         return
@@ -103,33 +103,34 @@ def printcard(line, col, card):  # print a card
     print(f"{v.codes.reset}", end="")
 
 
-def printhand(val):
+def printhand(val):  # Prints a card from your hand
     if val < 6:
         printcard(v.lines - 35, v.col - 65 + (26 * val), v.cards[f"p{v.turn}hand"][val])
     else:
         printcard(v.lines - 16, v.col - 78 + (26 * (val - 6)), v.cards[f"p{v.turn}hand"][val])
 
 
-def play(list):
-    card = []
+def play(list):  # Executes when you play a card
+    cards = []
     for i in range(len(v.selected)):
-        card.append(v.cards[f"p{v.turn}hand"][list[i]].split("-"))
+        cards.append(v.cards[f"p{v.turn}hand"][list[i]].split("-"))
 
     if len(list) == 1 and v.playtype == 0 or len(list) == 2 and v.playtype == 1 or len(list) == 3 and v.playtype == 2 or 3 <= len(list) <= v.maxstraight and v.playtype == 4:
-        if v.cards["pile"][len(v.cards["pile"]) - 1].split("-") < card[0]:
-            v.cards["pile"].append(v.cards[f"p{v.turn}hand"][list[0]])
+        if v.cards["pile"][len(v.cards["pile"]) - 1].split("-") < cards[0]:
+            if v.playtype != 4:
+                val = ord(cards[0].split("-")[0] - 65)
+                for card in cards:
+                    if ord(card.split("-")[0] - 65) == val + 1:
+                        val += 1
+                    else:
+                        error("Yo brochacho ts is NOT a straight :sob:")
+
+            v.cards["pile"].append(cards[len(cards) - 1])
             for index in list:
                 v.cards[f"p{v.turn}hand"][index] = ""
                 printhand(index)
             v.selected.clear()
-
-            if v.turn == 1:
-                v.turn = 2
-            else:
-                v.turn = 1
-
-            for i in range(13):
-                printhand(i)
+            passing(False)
 
             if len(v.cards["pile"]) > 0:
                 printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
@@ -137,24 +138,24 @@ def play(list):
                 printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
 
         else:
-            error("Your card is not higher than the last played card!")
+            error("Your card(s) are not higher than the last played card!")
     else:
         error("You're playing the wrong type of hand!")
 
 
-def skip():
-    v.cards["pile"].clear()
-    v.cards["pile"].append("")
+def passing(skip):  # Finishing turn / passing
+    if len(v.cards["pile"]) > 0:
+        printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
+    else:
+        printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
 
     if v.turn == 1:
         v.turn = 2
     else:
         v.turn = 1
-
     for i in range(13):
         printhand(i)
 
-    if len(v.cards["pile"]) > 0:
-        printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
-    else:
-        printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
+    if skip:
+        v.cards["pile"].clear()
+        v.cards["pile"].append("")

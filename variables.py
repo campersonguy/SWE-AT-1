@@ -35,11 +35,11 @@ symbols = { # locations of symbols on the card
     "M": ["5-12", "9-12"],
 }
 
-playtype = 1
+playtype = 4
 
 plays = ["High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
 
-ranks = ["3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A", "2"]
+ranks = ["3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"]
 
 # The maximum length of a straight, minimum is always 3, maximum is 13
 maxstraight = 13
@@ -73,7 +73,6 @@ suits = {  # Suit characters
     "3": f"{codes.red}♥{codes.reset}",
     "4": f"{codes.reset}♠{codes.reset}",
 }
-
 
 #  symbol locations - reference
 #  |-----------------------|
