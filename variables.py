@@ -9,13 +9,14 @@ selected = []
 
 cards = {  # (suit-rank)
     "deck": [
-        "A-1", "B-1", "C-1", "D-1", "E-1", "F-1", "G-1", "H-1", "I-1", "J-1", "K-1", "L-1", "M-1",
+        "B-1", "C-1", "D-1", "E-1", "F-1", "G-1", "H-1", "I-1", "J-1", "K-1", "L-1", "M-1",
         "A-2", "B-2", "C-2", "D-2", "E-2", "F-2", "G-2", "H-2", "I-2", "J-2", "K-2", "L-2", "M-2",
         "A-3", "B-3", "C-3", "D-3", "E-3", "F-3", "G-3", "H-3", "I-3", "J-3", "K-3", "L-3", "M-3",
         "A-4", "B-4", "C-4", "D-4", "E-4", "F-4", "G-4", "H-4", "I-4", "J-4", "K-4", "L-4", "M-4",
     ],
     "p1hand": [],
     "p2hand": [],
+    "p0hand": ["", "", "", "", "", "", "", "", "", "", "", "", ""],
     "pile": ["A-1"]
 }
 
@@ -35,9 +36,9 @@ symbols = { # locations of symbols on the card
     "M": ["5-12", "9-12"],
 }
 
-playtype = 1
+playtype = 0
 
-plays = ["High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
+plays = ["Any", "High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
 
 ranks = ["3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"]
 
@@ -49,6 +50,7 @@ contrast = True
 
 turn = 1
 
+detection = True
 
 class codes:  # List of ANSI escape codes for coloured text and other stuff
     home =  "\033[H"

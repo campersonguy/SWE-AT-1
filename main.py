@@ -20,7 +20,8 @@ for i in range(13):
 
 keyboard.hook(on_event)
 
-printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
+printcard(9, v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
+printui()
 
 while True:
     v.card = ((-v.cursor[1] + 1) * 6 + v.cursor[0] + 4) - 1

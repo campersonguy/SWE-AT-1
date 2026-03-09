@@ -33,6 +33,7 @@ def error(text):
 
 def printui():
     print(f"{move(0, 0)}Control the cursor with WASD.\nSelect cards to play with SPACE.\nPlay your hand with ENTER, or pass turn with P.\n\nCurrent Turn: Player {v.turn}\nPlay Type: {v.plays[v.playtype]}")
+    clearline(4)
 
 
 # The big stuff ----------------------------------------------------------------------------------------------------- #
@@ -55,11 +56,12 @@ def keypress(name, type):  # Key Detection
                 v.selected.append(v.card)
             printhand(v.card)
         case "enter", "down":
-            play(v.selected)
-            if len(v.cards["pile"]) > 0:
-                printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
-            else:
-                printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
+            if v.detection:
+                play(v.selected)
+                if len(v.cards["pile"]) > 0:
+                    printcard(9, v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
+                else:
+                    printcard(9, v.col, "empty")
         case "p", "down":
             passing(True)
     match type:
@@ -111,26 +113,34 @@ def printhand(val):  # Prints a card from your hand
 
 
 def play(list):  # Executes when you play a card
-    cards = []
-    for i in range(len(v.selected)):
-        cards.append(v.cards[f"p{v.turn}hand"][list[i]].split("-"))
+    if len(list) > 0:
+        cards = []
+        for i in range(len(v.selected)):
+            cards.append(v.cards[f"p{v.turn}hand"][list[i]])
+        cards.sort()
+    else:
+        return
 
-    if len(list) == 1 and v.playtype == 0 or len(list) == 2 and v.playtype == 1 or len(list) == 3 and v.playtype == 2 or 3 <= len(list) <= v.maxstraight and v.playtype == 4:
-        if v.cards["pile"][len(v.cards["pile"]) - 1].split("-") < cards[0]:
-            if v.playtype == 4:
-                val = ord(cards[0].split("-")[0] - 65)
+    if len(list) == v.playtype <= 4 or 3 <= len(list) <= v.maxstraight and v.playtype == 5 or v.playtype == 0:
+        if v.cards["pile"][len(v.cards["pile"]) - 1] < cards[0]:
+            if v.playtype == 0:
+                if not detectplay(cards):
+                    return
+
+            if v.playtype == 5:
+                val = ord(cards[0].split("-")[0]) - 65
                 for card in cards:
-                    if ord(card.split("-")[0] - 65) == val + 1:
+                    if ord(card.split("-")[0]) - 65 == val:
                         val += 1
                     else:
-                        error(f"You didn't play between 3 and {v.maxstraight} consecutive cards!")
+                        error(f"You didn't play consecutive cards!")
                         return
-            
-            for card in cards:
-                cardid = cards[0][0]
-                if card[0] != cardid:
-                    error("Not every card you played is the same!")
-                    return
+            else:
+                for card in cards:
+                    cardid = cards[0][0]
+                    if card[0] != cardid:
+                        error("Not every card you played is the same!")
+                        return
             
             v.cards["pile"].append(v.cards[f"p{v.turn}hand"][list[-1]])
             for index in list:
@@ -146,18 +156,46 @@ def play(list):  # Executes when you play a card
 
 
 def passing(skip):  # Finishing turn / passing
+    if skip:
+        v.cards["pile"].clear()
+        v.cards["pile"].append("")
+        v.playtype = 0
+
+    if len(v.cards["pile"]) > 0:
+        printcard(9, v.col, v.cards["pile"][-1])
+    else:
+        printcard(9, v.col, "empty")
+    previousturn = v.turn
+    v.turn = 0
+    for i in range(13):
+        printhand(i)
+    v.detection = False
+    print(f"{move(8, 0)}{v.codes.bold}Press SPACE to switch turns.{v.codes.reset}")
+    while not keyboard.is_pressed("space"):
+        pass
+    clearline(8)
+    v.turn = previousturn
     if v.turn == 1:
         v.turn = 2
     else:
         v.turn = 1
     for i in range(13):
         printhand(i)
+    v.detection = True
 
-    if len(v.cards["pile"]) > 0:
-        printcard(math.floor(v.lines / 2 - 30), v.col, v.cards["pile"][-1])
-    else:
-        printcard(math.floor(v.lines / 2 - 30), v.col, "empty")
 
-    if skip:
-        v.cards["pile"].clear()
-        v.cards["pile"].append("")
+def detectplay(cards):
+    for card in cards:
+        cardid = cards[0][0]
+        if card[0] != cardid:
+            val = ord(cards[0].split("-")[0]) - 65
+            for card in cards:
+                if ord(card.split("-")[0]) - 65 == val:
+                    val += 1
+                else:
+                    error("That's not a type of hand you can play.")
+                    return False
+            v.playtype = 5
+            return True
+    v.playtype = len(cards)
+    return True
