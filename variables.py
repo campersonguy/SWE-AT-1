@@ -7,6 +7,8 @@ cursor = [0, 0]
 card = 0
 selected = []
 
+names = ["", ""]
+
 cards = {  # (suit-rank)
     "deck": [
         "B-1", "C-1", "D-1", "E-1", "F-1", "G-1", "H-1", "I-1", "J-1", "K-1", "L-1", "M-1",
@@ -17,7 +19,7 @@ cards = {  # (suit-rank)
     "p1hand": [],
     "p2hand": [],
     "p0hand": ["", "", "", "", "", "", "", "", "", "", "", "", ""],
-    "pile": ["A-1"]
+    "pile": [""]
 }
 
 symbols = { # locations of symbols on the card
@@ -38,9 +40,9 @@ symbols = { # locations of symbols on the card
 
 playtype = 0
 
-plays = ["Any", "High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight"]
+plays = ("Any", "High Card", "Pair", "Three of a Kind", "Four of a Kind", "Straight")
 
-ranks = ["3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"]
+ranks = ("3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2")
 
 # The maximum length of a straight, minimum is always 3, maximum is 13
 maxstraight = 13
@@ -49,6 +51,9 @@ maxstraight = 13
 contrast = True
 
 turn = 1
+
+straightlen = 0
+straightval = 0
 
 detection = True
 
@@ -75,6 +80,29 @@ suits = {  # Suit characters
     "3": f"{codes.red}♥{codes.reset}",
     "4": f"{codes.reset}♠{codes.reset}",
 }
+
+titlecard = [
+    "      _______ _     _      _                  ",
+    "     |__   __| |   (_)    | |                 ",
+    "        | |  | |__  _ _ __| |_ ___  ___ _ __  ",
+    "        | |  | '_ \| | '__| __/ _ \/ _ \ '_ \ ",
+    "        | |  | | | | | |  | ||  __/  __/ | | |",
+    "        |_|  |_| |_|_|_|   \__\___|\___|_| |_|",
+    "",
+    "",
+    "",
+    "",
+    "┏┓              ┓  ┓     ┏┓           ┳┳   ┏┓•  ┓•     ",
+    "┗┓┏┓┏┓┏┓┏┏┓┏┓┏┓┏┫  ┣┓┓┏  ┣┫┏┳┓┓┏┏┓┏┓  ┃┃┏  ┣┫┓┏┓┃┓┏┓┏┓┏",
+    "┗┛┣┛┗┛┛┗┛┗┛┛ ┗ ┗┻  ┗┛┗┫  ┛┗┛┗┗┗┻┛┗┗┫  ┗┛┛  ┛┗┗┛ ┗┗┛┗┗ ┛",
+    "  ┛                   ┛            ┛                   ",
+    "      Making your flights sussier by the second!"
+    "",
+    "",
+    "",
+    "",
+    "             (Press SPACE to continue)",
+]
 
 #  symbol locations - reference
 #  |-----------------------|
