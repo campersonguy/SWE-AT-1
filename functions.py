@@ -40,6 +40,11 @@ def printui():
         print(f"{move(6, 0)}Play Type: {v.plays[v.playtype]}")
     clearline(4)
 
+def yap(line):  # yappin
+    for letter in line:
+        print(letter, end="", flush=True)
+        time.sleep(0.05)
+
 
 # The big stuff ----------------------------------------------------------------------------------------------------- #
 

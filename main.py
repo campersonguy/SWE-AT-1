@@ -41,8 +41,17 @@ v.names[0] = input("Player 1's name: ")
 clear()
 v.names[1] = input("Player 2's name: ")
 clear()
-print("\033[?25l", end="")
 time.sleep(1)
+
+if input("Do you want to go through the tutorial? (Y/N) ").upper() != "N":
+    clear()
+    time.sleep(2)
+    for line in v.tutorial:
+        yap(line + "\n")
+        time.sleep(2)
+
+print("\033[?25l", end="")
+
 for i in range(3):
     print(f"Loading in {3 - i}...")
     time.sleep(1)
