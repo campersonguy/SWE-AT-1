@@ -67,6 +67,9 @@ def keypress(name, type):  # Key Detection
             printhand(v.card)
         case "enter", "down":
             if v.detection:
+                if all(card == "" for card in v.cards["p1hand"]) or all(card == "" for card in v.cards["p2hand"]):
+                    end()
+                    return
                 play(v.selected)
                 if len(v.cards["pile"]) > 0:
                     printcard(9, v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
@@ -220,3 +223,10 @@ def detectplay(cards):
             return True
     v.playtype = len(cards)
     return True
+
+
+def end():
+    clear()
+    print("Player won!")
+    time.sleep(10)
+    exit()

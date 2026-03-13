@@ -47,9 +47,6 @@ ranks = ("3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2")
 # The maximum length of a straight, minimum is always 3, maximum is 13
 maxstraight = 13
 
-# Enable/Disable colour contrast cards - makes it easier to tell suits apart
-contrast = True
-
 turn = 1
 
 straightlen = 0
@@ -111,6 +108,7 @@ tutorial = [
     "At the start of the game, each player draws 13 cards from the deck.",
     "These cards will be organised by rank and suit, which will already be done for you.",
     "In this game, the highest card is a 2. So the card order is 3, 4, 5 [etc...], J, Q, K, 2.",
+    "",
     "The player who goes first can start by playing any of the following hands: high card, pair, three of a kind, four of a kind or a straight.",
     "Straights can be any length, as long as it is more than 3, so you may see some devious straights from this game.",
     f"The player who goes next {codes.italic}has{codes.reset} to play the same type of hand you played. For example, if I play a pair, you have to play a pair.",
@@ -126,7 +124,6 @@ tutorial = [
     "As soon as a player reaches zero cards, the game ends.",
     "Have fun!",
     "",
-
 ]
 
 #  symbol locations - reference

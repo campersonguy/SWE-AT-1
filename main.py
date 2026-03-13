@@ -50,7 +50,7 @@ if input("Do you want to go through the tutorial? (Y/N) ").upper() != "N":
         yap(line + "\n")
         time.sleep(2)
 
-print("\033[?25l", end="")
+print(f"\033[?25l{clear()}", end="")
 
 for i in range(3):
     print(f"Loading in {3 - i}...")
@@ -73,11 +73,3 @@ printui()
 
 while True:
     v.card = ((-v.cursor[1] + 1) * 6 + v.cursor[0] + 4) - 1
-    if all(card == "" for card in v.cards["p1hand"]):
-        break
-    if all(card == "" for card in v.cards["p2hand"]):
-        break
-
-print("Player won!")
-time.sleep(10)
-exit()
