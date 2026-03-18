@@ -227,6 +227,6 @@ def detectplay(cards):
 
 def end():
     clear()
-    print("Player won!")
+    print(f"Player {v.turn} has won!")
     time.sleep(10)
     exit()
