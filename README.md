@@ -1,7 +1,11 @@
 # Software Engineering Assessment Task 1 - Programming Fundamentals
 
-Sponsored by Amung Us Airlines
+<em>Sponsored by Amung Us Airlines!</em>
+
+Requires <strong>Keyboard</strong> library to play.
 
 
-
-gjioeghif4ou3iewfhkuljdshbvniufhvkifayvgdwdlhfojfeashb
+Instructions for use:
+1. Download the SWE-AT-1 zip folder.
+2. Open the run.bat file.
+3. Enjoy!
