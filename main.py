@@ -26,7 +26,7 @@ while True:
     print(f"{move(0, 0)}Your screen is {shutil.get_terminal_size().columns} columns wide and {shutil.get_terminal_size().lines} lines long.\nYour screen needs to be at least 208 columns wide and 61 lines long.\nPress SPACE to reload (or load you in if your screen is large enough). Please do not resize your screen after that.")
     while not keyboard.is_pressed("space"):
         pass
-    if shutil.get_terminal_size().lines >= 1 and shutil.get_terminal_size().columns >= 1:
+    if shutil.get_terminal_size().lines >= 208 and shutil.get_terminal_size().columns >= 61:
         clear()
         break
     clear()
