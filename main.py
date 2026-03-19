@@ -23,7 +23,7 @@ time.sleep(0.5)
 
 
 while True:
-    print(f"{move(0, 0)}Your screen is {shutil.get_terminal_size().columns} columns wide and {shutil.get_terminal_size().lines} lines long.\nYour screen needs to be at least 208 columns wide and 61 lines long.\nPress SPACE to reload (or load you in if your screen is large enough).")
+    print(f"{move(0, 0)}Your screen is {shutil.get_terminal_size().columns} columns wide and {shutil.get_terminal_size().lines} lines long.\nYour screen needs to be at least 208 columns wide and 61 lines long.\nPress SPACE to reload (or load you in if your screen is large enough). Please do not resize your screen after that.")
     while not keyboard.is_pressed("space"):
         pass
     if shutil.get_terminal_size().lines >= 1 and shutil.get_terminal_size().columns >= 1:
@@ -43,7 +43,7 @@ v.names[1] = input("Player 2's name: ")
 clear()
 time.sleep(1)
 
-if input("Do you want to go through the tutorial? (Y/N) ").upper() != "N":
+if input("Do you want to go through the tutorial? (Y/N) ").upper() == "Y":
     clear()
     time.sleep(2)
     for line in v.tutorial:
