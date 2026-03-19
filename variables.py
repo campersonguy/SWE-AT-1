@@ -1,4 +1,4 @@
-import random, shutil, math
+import shutil, math
 
 lines = shutil.get_terminal_size().lines
 col = math.floor(shutil.get_terminal_size().columns / 2 - 12)

@@ -1,4 +1,4 @@
-import os, random, shutil, math, time, keyboard
+import random, shutil, math, time, keyboard
 import variables as v
 from functions import *
 
@@ -58,13 +58,10 @@ for i in range(3):
     clear()
 
 random.shuffle(v.cards["deck"])
-for i in range(1):
+for i in range(2):
     for i1 in range(13):
-        v.cards[f"p{i + 2}hand"].append(v.cards["deck"].pop())
+        v.cards[f"p{i + 1}hand"].append(v.cards["deck"].pop())
     v.cards[f"p{i + 1}hand"].sort()
-
-for i in range(13):
-    v.cards["p1hand"].append("")
 
 for i in range(13):
     printhand(i)

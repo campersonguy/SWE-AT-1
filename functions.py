@@ -1,4 +1,4 @@
-import os, keyboard, time, math
+import os, keyboard, time
 import variables as v
 
 
