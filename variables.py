@@ -112,7 +112,8 @@ tutorial = [
     "The player who goes first can start by playing any of the following hands: high card, pair, three of a kind, four of a kind or a straight.",
     "Straights can be any length, as long as it is more than 3, so you may see some devious straights from this game.",
     f"The player who goes next {codes.italic}has{codes.reset} to play the same type of hand you played. For example, if I play a pair, you have to play a pair.",
-    "The hand you play next also has to be higher than the last player's hand. If it is the same, the suit has to be higher.\nThe suit order is diamonds lowest, clubs, hearts and spades highest.",
+    "The hand you play next also has to be higher than the last player's hand. If it is the same, the suit has to be higher.",
+    "The suit order is diamonds lowest, clubs, hearts and spades highest.",
     "",
     "If you can't play a higher hand, or you just feel like it, you can pass your turn. The other player wins that round.",
     "The other player then gets to play any hand, just like at the start of the game.",
@@ -122,6 +123,11 @@ tutorial = [
     "If I play a 4-5-6-7-8 straight, your straight must start on a card higher than 4.",
     "",
     "As soon as a player reaches zero cards, the game ends.",
+    ""
+    "In this version, once you play your cards, the cards will be hidden until you press SPACE."
+    "Take this time to hand the laptop to the other player, who will press SPACE and continnue the game."
+    "This ensures that you don't see each other's cards."
+    "",
     "Have fun!",
     "",
 ]

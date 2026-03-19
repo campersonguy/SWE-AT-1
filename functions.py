@@ -33,7 +33,7 @@ def error(text):
     clearline(8)
 
 def printui():
-    print(f"{move(0, 0)}Control the cursor with WASD.\nSelect cards to play with SPACE.\nPlay your hand with ENTER, or pass turn with P.\n\nCurrent Turn: {v.names[v.turn - 1]}")
+    print(f"{move(0, 0)}Control the cursor with WASD or arrow keys.\nSelect cards to play with SPACE.\nPlay your hand with ENTER, or pass turn with P or TILDE if you are on Mac.\n\nCurrent Turn: {v.names[v.turn - 1]}")
     if v.playtype == 5:
         print(f"{move(6, 0)}Play Type: {v.plays[v.playtype]} (Length: {v.straightlen})")
     else:
@@ -75,7 +75,7 @@ def keypress(name, type):  # Key Detection
                     printcard(9, v.col, v.cards["pile"][len(v.cards["pile"]) - 1])
                 else:
                     printcard(9, v.col, "empty")
-        case "p", "down":
+        case "p" | "`", "down":
             passing(True)
     match type:
         case "down":
@@ -227,6 +227,6 @@ def detectplay(cards):
 
 def end():
     clear()
-    print(f"Player {v.turn} has won!")
+    print(f"{v.names[v.turn]} (Player {v.turn}) has won!\nAmung Us Airlines congratulates you!")
     time.sleep(10)
     exit()
